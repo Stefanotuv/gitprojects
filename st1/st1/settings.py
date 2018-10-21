@@ -14,8 +14,13 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR,"exercise","js")
-print(TEMPLATE_DIR)
+
+
+STATIC_DIR = os.path.join(BASE_DIR,"static")
+print(STATIC_DIR)
+TEMPLATE_DIR = os.path.join(STATIC_DIR,"ex")
+
+# print(TEMPLATE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -25,6 +30,7 @@ SECRET_KEY = 'lyed8%072&hf+07le*ge6vfw04@=d&1##711uok9q7!35@@(^='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -56,7 +62,7 @@ ROOT_URLCONF = 'st1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,TEMPLATE_DIR],
+        'DIRS': [BASE_DIR, STATIC_DIR, TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,3 +126,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIR=[
+    STATIC_DIR,
+    TEMPLATE_DIR,
+]
