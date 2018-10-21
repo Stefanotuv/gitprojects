@@ -1,9 +1,12 @@
 """
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from exercise import views
 
 urlpatterns = [
     path('', views.exercise, name="exercise"),
+    path('', views.index, name="index"),
+
 ]

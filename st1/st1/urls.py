@@ -21,7 +21,7 @@ from exercise import views
 urlpatterns = [
     # path('',include('exercise.urls')),
     # path('static/',include('exercise.urls')),
-    url(r'^$',views.index,name='index'),
+    path('', views.index, name="index"),
     path('exercise/',include('exercise.urls')),
     path('admin/', admin.site.urls),
 ]

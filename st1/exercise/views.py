@@ -7,7 +7,9 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("INDEX PAGE")
+    testDict = {'testfromexercise':'TEST FROM INDEX'}
+    return render(request, 'exercise/index.html',context=testDict)
+
 
 def exercise(request):
     # all the options below work. the diffence in the path would require to
