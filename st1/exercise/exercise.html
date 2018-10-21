@@ -1,14 +1,20 @@
 <!DOCTYPE html>
+    <!-- {% load static from staticfiles %} -->
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <script src="jsp/exercise.jsp" type="text/javascript">
 
-    </script>
-    <title>Exericse File</title>
+    <title>Exercise File</title>
+    <script src="js/exercise.js">  </script>
+
+    <!-- <script src="{% static 'js/exercise.js' %}"></script> -->
+
   </head>
 
   <body>
-      <h1>This is the test file for js</h1>
+      <h1>This is the test file for js!</h1>
+      <p></p>
+      {{ testfromexercise }}
   </body>
 </html>

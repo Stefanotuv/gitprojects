@@ -16,8 +16,9 @@ def exercise(request):
     # return render(request, 'exercise.html') - required BASE_DIR+'/exercise'
     # return render_to_response('exercise/exercise.html')
     # return render_to_response('exercise.html') - required BASE_DIR+'/exercise'
-
-    template = loader.get_template("exercise/exercise.html")
-
-    return HttpResponse(template.render())
-#     return HttpResponse("Exercise page from HttpResponse")
+    # template = loader.get_template("exercise/exercise.html")
+    #
+    # return HttpResponse(template.render())
+    # return HttpResponse("Exercise page from HttpResponse")
+    testDict = {'testfromexercise':'TEST FROM EXERCISE'}
+    return render(request, 'exercise/exercise.html',context=testDict)
