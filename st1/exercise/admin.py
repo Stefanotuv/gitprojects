@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from exercise.models import AppUser,UserActivities
+admin.site.register(AppUser)
+admin.site.register(UserActivities)
