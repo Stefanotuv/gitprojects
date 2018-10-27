@@ -9,53 +9,55 @@ import django
 # Import settings
 django.setup()
 # Create your models here.
-from exercise.models import AppUser
-#
-# from faker import Faker
-# fakegen = Faker()
-# class Topic(models.Model):
-#     top_name = models.CharField(max_length=264,unique=True)
-#
-#     def __str__(self):
-#         return self.top_name
-#
-# class Webpage(models.Model):
-#     topic = models.ForeignKey(Topic)
-#     name = models.CharField(max_length=264,unique=True)
-#     url = models.URLField(unique=True)
-#
-#     def __str__(self):
-#         return self.name
-#
-# class AccessRecord(models.Model):
-#     name = models.ForeignKey(Webpage)
-#     date = models.DateField()
-#
-#     def __str__(self):
-#         return str(self.date)
 
-# class AppUser(models.Model):
-#
-#     name = models.CharField(max_length=264,unique=True)
-#     surnaname = models.CharField(max_length=264,unique=True)
-#     email = models.EmailField(max_length=70,blank=True)
-#
-#     def __str__(self):
-#         return sstr(self.name +" "+self.surname)
-#
-# Test = AppUser()
-#
-# print(Test)
+# import the classes from the models
+from exercise.models import AppUser, UserActivities
+
+# classes to generate fake contents
+import random
+from faker import Faker
+fakegen = Faker()
+
+def populate(N):
+    '''
+    Create N Entries of Dates Accessed
+    '''
+    for entry in range(N):
+        # Create Fake Data for entry
+        # fake_name = fakegen.name().split()
+        # fake_first_name = fake_name[0]
+        # fake_last_name = fake_name[-1]
+        fake_first_name = fakegen.first_name()
+        fake_last_name = fakegen.last_name()
+
+        fake_email = fakegen.email()
+        print(fake_email)
+        fake_date = fakegen.date()
+
+        # Create new User Entry
+        user = AppUser.objects.get_or_create(name=fake_first_name,surname=fake_last_name,email=fake_email)[0]
+        user.save()
+        UserActivities.objects.get_or_create(appUser=user,date=fake_date)
+
+
+
+
+
+
 
 if __name__ == '__main__':
-    print("something")
-    testUser = AppUser()
-    # testActivity = UserActivities()
-
-    testUser.name = "stefano"
-    testUser.surname = "tuveri"
-    # testActivity.user = testUser
-    # testActivity.date = fakegen.date()
-
-    print(testUser)
-    print('something else')
+    # print("something")
+    # testUser = AppUser()
+    # # testActivity = UserActivities()
+    #
+    # testUser.name = "stefano"
+    # testUser.surname = "tuveri"
+    # # testActivity.user = testUser
+    # # testActivity.date = fakegen.date()
+    #
+    # print(testUser)
+    # print('something else')
+    print("Populating the databases...Please Wait")
+    populate(100)
+    # populate(100)
+    print('Populating Complete')
