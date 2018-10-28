@@ -11,53 +11,67 @@ django.setup()
 # Create your models here.
 
 # import the classes from the models
-from exercise.models import AppUser, UserActivities
+from exercise.models import AppUser, UserActivities, Website, SiteType
 
 # classes to generate fake contents
 import random
 from faker import Faker
 fakegen = Faker()
 
+def populateSiteTypes():
+    print('inside populateSiteTypes')
+    topics = ('Search','Social','Marketplace','News','Games')
+
+
+    N = topics.__len__()
+
+    print('value of N:/n')
+    print(N)
+
+    for i in topics:
+        print(i)
+        siteType = SiteType.objects.get_or_create(type=i)[0]
+    print(siteType)
+
+
 def populate(N):
     '''
     Create N Entries of Dates Accessed
     '''
     for entry in range(N):
-        # Create Fake Data for entry
-        # fake_name = fakegen.name().split()
-        # fake_first_name = fake_name[0]
-        # fake_last_name = fake_name[-1]
+
         fake_first_name = fakegen.first_name()
         fake_last_name = fakegen.last_name()
-
         fake_email = fakegen.email()
-        print(fake_email)
         fake_date = fakegen.date()
+        fake_websitename = fakegen.url()
 
-        # Create new User Entry
-        user = AppUser.objects.get_or_create(name=fake_first_name,surname=fake_last_name,email=fake_email)[0]
-        user.save()
-        UserActivities.objects.get_or_create(appUser=user,date=fake_date)
+        sitetypeAll = SiteType.objects.all()
 
+        sitetypeSel = random.choice(sitetypeAll)
 
+        print(sitetypeSel)
 
+        # print(sitetype)
 
+        user = AppUser.objects.get_or_create(name=fake_first_name,
+                                            surname=fake_last_name,
+                                            email=fake_email)[0]
 
+        web = Website.objects.get_or_create(sitetype=sitetypeSel,
+                                            url=fake_websitename)[0]
 
+        activity = UserActivities.objects.get_or_create(appUser=user,
+                                                        webstVisited=web,
+                                                        date=fake_date)[0]
 
 if __name__ == '__main__':
-    # print("something")
-    # testUser = AppUser()
-    # # testActivity = UserActivities()
-    #
-    # testUser.name = "stefano"
-    # testUser.surname = "tuveri"
-    # # testActivity.user = testUser
-    # # testActivity.date = fakegen.date()
-    #
-    # print(testUser)
-    # print('something else')
+
+
+    populateSiteTypes()
+
     print("Populating the databases...Please Wait")
-    populate(100)
-    # populate(100)
+
+    populate(10)
+
     print('Populating Complete')
