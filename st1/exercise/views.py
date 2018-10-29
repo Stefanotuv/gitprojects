@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.template import Context, loader
+from exercise.models import AppUser
 
 # Create your views here.
 
@@ -24,3 +25,9 @@ def exercise(request):
     # return HttpResponse("Exercise page from HttpResponse")
     testDict = {'testfromexercise':'TEST FROM EXERCISE'}
     return render(request, 'exercise/exercise.html',context=testDict)
+
+def users(request):
+
+    user_list = AppUser.objects.order_by('surname')
+    user_dict = {"users":user_list}
+    return render(request,'exercise/users.html',context=user_dict)
