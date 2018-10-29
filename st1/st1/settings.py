@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_DIR = os.path.join(BASE_DIR,"static")
+EXERCISE_DIR = os.path.join(STATIC_DIR,"ex")
 TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
 
 # print(TEMPLATE_DIR)
@@ -133,5 +134,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
     BASE_DIR,
-    # TEMPLATE_DIR,
+    EXERCISE_DIR,
+    TEMPLATE_DIR,
 ]

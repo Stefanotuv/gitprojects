@@ -31,3 +31,15 @@ def users(request):
     user_list = AppUser.objects.order_by('surname')
     user_dict = {"users":user_list}
     return render(request,'exercise/users.html',context=user_dict)
+
+def usersNew(request):
+
+    user_list = AppUser.objects.order_by('name')
+    j=0
+    numbers = []
+    for i in user_list:
+        numbers.append(j)
+        j=j+1
+
+    user_dict = {"users":user_list,"numbers":numbers}
+    return render(request,'exercise/usersNew.html',context=user_dict)
